@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+body, .App {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: auto;
+}
+
+.places-list {
+	padding: 0;
+	margin: 10px;
+	overflow: auto;
+}
+
+.search-area {
+	font-size: 1.2em;
+	float: left;
+}
+
+#search-field {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid;
+}
+
+.search-box {
+  padding: 10px 10px;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: green;
+  background-color: white;
+}
+
+.place {
+  cursor: pointer;
+  padding: 5px;
+  border: 1px outset pink;
+  font-weight: 400;
+  font-size: 1em;
+  color: green;
+}
+
+.place:hover {
+  color: black;
+  background-color: #e8eaed;
+}
+
+#places-list {
+  background: #e8eaed;
+  border: 1px solid darkgrey;
+}
+
+ #map {
+     height: 400px;
+     max-width: 100%;
+     background-color: #ccc;
+     margin: 0 5px;
+	 display: flex;
+	 flex-wrap: wrap;
+}
