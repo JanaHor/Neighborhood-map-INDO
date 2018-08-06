@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PlacesList from "./PlacesList";
+import FoursquareData from "./foursquareAPI";
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class App extends Component {
 	"type": "transport",
 	"icon": "http://maps.google.com/mapfiles/kml/pushpin/grn-pushpin.png",
 	"latitude": -7.787684, 
-	"longitude": 110.431761
+	"longitude": 110.431761,
+	"id": "5a88069026659b534a876e49"
 	},
     
 	{
@@ -20,7 +22,8 @@ class App extends Component {
 	"type": "transport",
 	"icon": "http://maps.google.com/mapfiles/kml/pushpin/grn-pushpin.png",
 	"latitude": -7.78927, 
-	"longitude": 110.363553
+	"longitude": 110.363553,
+	"id": "503b6693e4b0bbf1b090a5ca"
 	},
 	
     {
@@ -28,7 +31,8 @@ class App extends Component {
 	"type": "shopping",
 	"icon": "http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png",
     "latitude": -7.79265, 
-	"longitude": 110.365888
+	"longitude": 110.365888,
+	"id": "5904578435dfa74d07931eae"
 	},
     
 	{
@@ -36,7 +40,8 @@ class App extends Component {
 	"type": "shopping",
 	"icon": "http://maps.google.com/mapfiles/kml/pushpin/pink-pushpin.png",
 	"latitude": -7.798954, 
-	"longitude": 110.36728
+	"longitude": 110.36728,
+	"id": "4ba47041f964a520669d38e3"
 	},
     
 	{
@@ -44,7 +49,8 @@ class App extends Component {
 	"type": "entertainment",
 	"icon": "http://maps.google.com/mapfiles/kml/pushpin/blue-pushpin.png",
 	"latitude": -7.810313, 
-	"longitude": 110.360018
+	"longitude": 110.360018,
+	"id": "4bad8b68f964a520535a3be3"
 	},
     
 	{
@@ -52,7 +58,8 @@ class App extends Component {
 	"type": "entertainment",
 	"icon": "http://maps.google.com/mapfiles/kml/pushpin/blue-pushpin.png",
 	"latitude": -7.804093, 
-	"longitude": 110.398013
+	"longitude": 110.398013,
+	"id": "4bb53e8c941ad13afafe1de3"
 	}
 ],
       map: "",
@@ -85,7 +92,7 @@ class App extends Component {
     });
 
     var infoWindow = new window.google.maps.InfoWindow({});
-
+	
     window.google.maps.event.addListener(infoWindow, "closeclick", function() {
       _this.closeInfoWindow();
     });
@@ -133,7 +140,6 @@ class App extends Component {
     this.setState({
       allPlaces: allPlaces
     });
-	
   }
 
    // Load the script that refer to google maps
@@ -144,19 +150,21 @@ class App extends Component {
         script.async = true;
         ref.parentNode.insertBefore(script, ref);
     }
-  
-  
-  // Open the Info Window and set parameters
+   
+  // Open the Info Window and set parameters including animated active marker
     openInfoWindow(marker) {
-    this.closeInfoWindow();
+    marker.infowindow = new window.google.maps.InfoWindow({});
+	this.closeInfoWindow();
     this.state.infoWindow.open(this.state.map, marker);
     this.setState({
       prevMarker: marker
     });
-    this.state.infoWindow.setContent(marker.title);
+	marker.setAnimation(window.google.maps.Animation.BOUNCE);
     this.state.map.setCenter(marker.getPosition());
-  }
+	FoursquareData(marker.id, marker.infowindow)
 
+  }
+  
   // Close the opened Info Window
    closeInfoWindow() {
     if (this.state.prevMarker) {
@@ -167,7 +175,6 @@ class App extends Component {
     });
     this.state.infoWindow.close();
   }
-
 
   render() {
     return (
