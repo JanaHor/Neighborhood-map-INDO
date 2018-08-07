@@ -184,7 +184,7 @@ class App extends Component {
           openInfoWindow={this.openInfoWindow}
           closeInfoWindow={this.closeInfoWindow}
         />
-        <div id="map" />
+        <div id="map" role="application"/>
       </div>
     );
   }
