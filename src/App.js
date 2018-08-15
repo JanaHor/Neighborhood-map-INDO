@@ -124,11 +124,14 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP,
         map: map,
 		title: location.title,
-		icon: location.icon
+		icon: location.icon,
+		venueID: location.id
       });
 
    // Create an onclick event to open an infowindow at each marker.
-	     marker.addListener("click", function() {
+	     marker.addListener("click", function(e) {
+	console.log(e)
+	console.log(marker)
         _this.openInfoWindow(marker);
       });
 
@@ -161,7 +164,7 @@ class App extends Component {
     });
 	marker.setAnimation(window.google.maps.Animation.BOUNCE);
     this.state.map.setCenter(marker.getPosition());
-	FoursquareData(marker.id, marker.infowindow)
+	FoursquareData(marker.venueId, marker.infowindow)
 
   }
   
