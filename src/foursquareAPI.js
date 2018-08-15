@@ -5,7 +5,8 @@ export default function FoursquareData(id, infowindow) {
 
   fetch(url)
     .then(function (response) {
-      return response.json();
+      	console.log(response)
+	return response.json();
     })
     .then((info) => {
       infowindow.setContent(
@@ -14,7 +15,6 @@ export default function FoursquareData(id, infowindow) {
 		 )
     })
     .catch(() => {
-      console.log("error")
-	  /* OR?? infowindow.setContent("Not possible to get info from Foursquare!")  */
+      infowindow.setContent("Not possible to get info from Foursquare!")
     })
 }
